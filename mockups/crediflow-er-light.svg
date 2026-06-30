@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780">
+  <style>
+    text{font-family:'Segoe UI',Arial,sans-serif;fill:#212529}
+    .t{font-size:20px;font-weight:700}
+    .en{font-size:14px;font-weight:700}
+    .row{font-size:12px}
+    .card{font-size:12px;font-weight:700;fill:#364fc7}
+    .rel{font-size:12px;font-style:italic;fill:#495057}
+    .leg{font-size:12px;fill:#868e96}
+  </style>
+  <rect width="1200" height="780" fill="#ffffff"/>
+  <text x="600" y="30" text-anchor="middle" class="t">CrediFlow — Modelo de Datos (ER) · BD única PostgreSQL</text>
+
+  <!-- ===== Relaciones (debajo de las entidades) ===== -->
+  <!-- Rel1 Rol->Usuario (intra Seguridad) -->
+  <line x1="140" y1="156" x2="140" y2="240" stroke="#495057" stroke-width="1.5"/>
+  <text x="148" y="172" class="card">1</text>
+  <text x="148" y="236" class="card">N</text>
+  <text x="148" y="205" class="rel">rol</text>
+  <!-- Rel2 Cliente->Solicitud (intra Originación) -->
+  <line x1="595" y1="236" x2="595" y2="310" stroke="#495057" stroke-width="1.5"/>
+  <text x="603" y="252" class="card">1</text>
+  <text x="603" y="306" class="card">N</text>
+  <text x="603" y="282" class="rel">clienteId</text>
+  <!-- Rel4 Solicitud->Documento (intra Originación) -->
+  <line x1="595" y1="476" x2="595" y2="560" stroke="#495057" stroke-width="1.5"/>
+  <text x="603" y="492" class="card">1</text>
+  <text x="603" y="556" class="card">N</text>
+  <text x="603" y="522" class="rel">solicitudId</text>
+  <!-- Rel3 Usuario->Solicitud (cruza módulo) -->
+  <line x1="240" y1="303" x2="470" y2="372" stroke="#adb5bd" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="250" y="300" class="card">1</text>
+  <text x="452" y="368" class="card">N</text>
+  <text x="300" y="326" class="rel">asesorId</text>
+  <!-- Rel5 Solicitud->EvaluacionRiesgo (cruza módulo) -->
+  <line x1="720" y1="393" x2="900" y2="393" stroke="#adb5bd" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="728" y="388" class="card">1</text>
+  <text x="884" y="388" class="card">N</text>
+  <text x="760" y="385" class="rel">solicitudId</text>
+  <!-- Rel6 Solicitud->RegistroAuditoria (cruza módulo) -->
+  <line x1="720" y1="338" x2="900" y2="150" stroke="#adb5bd" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="726" y="334" class="card">1</text>
+  <text x="884" y="150" class="card">N</text>
+  <text x="772" y="228" class="rel">solicitudId</text>
+  <!-- Rel7 Usuario->RegistroAuditoria (cruza módulo, ruta perimetral) -->
+  <polyline points="40,290 20,290 20,48 1035,48 1035,70" fill="none" stroke="#adb5bd" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="30" y="285" class="card">1</text>
+  <text x="1040" y="66" class="card">N</text>
+  <text x="900" y="42" class="rel">usuario</text>
+
+  <!-- ===== Entidades ===== -->
+  <!-- Rol (Seguridad) -->
+  <rect x="40" y="70" width="200" height="86" rx="4" fill="#ffffff" stroke="#9673a6"/>
+  <rect x="40" y="70" width="200" height="26" rx="4" fill="#e1d5e7" stroke="#9673a6"/>
+  <text x="140" y="88" text-anchor="middle" class="en">Rol · [Seguridad]</text>
+  <line x1="40" y1="96" x2="240" y2="96" stroke="#9673a6"/>
+  <text x="52" y="111" class="row"><tspan x="52" dy="0">PK · id</tspan><tspan x="52" dy="20">nombre</tspan><tspan x="52" dy="20">descripcion</tspan></text>
+
+  <!-- Usuario (Seguridad) -->
+  <rect x="40" y="240" width="200" height="126" rx="4" fill="#ffffff" stroke="#9673a6"/>
+  <rect x="40" y="240" width="200" height="26" rx="4" fill="#e1d5e7" stroke="#9673a6"/>
+  <text x="140" y="258" text-anchor="middle" class="en">Usuario · [Seguridad]</text>
+  <line x1="40" y1="266" x2="240" y2="266" stroke="#9673a6"/>
+  <text x="52" y="281" class="row"><tspan x="52" dy="0">PK · id</tspan><tspan x="52" dy="20">username</tspan><tspan x="52" dy="20">passwordHash</tspan><tspan x="52" dy="20">FK · rol</tspan><tspan x="52" dy="20">estado</tspan></text>
+
+  <!-- Cliente (Originación) -->
+  <rect x="470" y="70" width="250" height="166" rx="4" fill="#ffffff" stroke="#6c8ebf"/>
+  <rect x="470" y="70" width="250" height="26" rx="4" fill="#dae8fc" stroke="#6c8ebf"/>
+  <text x="595" y="88" text-anchor="middle" class="en">Cliente · [Originación]</text>
+  <line x1="470" y1="96" x2="720" y2="96" stroke="#6c8ebf"/>
+  <text x="482" y="111" class="row"><tspan x="482" dy="0">PK · id</tspan><tspan x="482" dy="20">tipoDoc</tspan><tspan x="482" dy="20">numDoc</tspan><tspan x="482" dy="20">nombres</tspan><tspan x="482" dy="20">apellidos</tspan><tspan x="482" dy="20">ingresoMensual</tspan><tspan x="482" dy="20">deudasActuales</tspan></text>
+
+  <!-- Solicitud (Originación) -->
+  <rect x="470" y="310" width="250" height="166" rx="4" fill="#ffffff" stroke="#6c8ebf"/>
+  <rect x="470" y="310" width="250" height="26" rx="4" fill="#dae8fc" stroke="#6c8ebf"/>
+  <text x="595" y="328" text-anchor="middle" class="en">Solicitud · [Originación]</text>
+  <line x1="470" y1="336" x2="720" y2="336" stroke="#6c8ebf"/>
+  <text x="482" y="351" class="row"><tspan x="482" dy="0">PK · id</tspan><tspan x="482" dy="20">FK · clienteId</tspan><tspan x="482" dy="20">FK · asesorId</tspan><tspan x="482" dy="20">monto</tspan><tspan x="482" dy="20">plazoMeses</tspan><tspan x="482" dy="20">estado</tspan><tspan x="482" dy="20">fechaRegistro</tspan></text>
+
+  <!-- Documento (Originación) -->
+  <rect x="470" y="560" width="250" height="146" rx="4" fill="#ffffff" stroke="#6c8ebf"/>
+  <rect x="470" y="560" width="250" height="26" rx="4" fill="#dae8fc" stroke="#6c8ebf"/>
+  <text x="595" y="578" text-anchor="middle" class="en">Documento · [Originación]</text>
+  <line x1="470" y1="586" x2="720" y2="586" stroke="#6c8ebf"/>
+  <text x="482" y="601" class="row"><tspan x="482" dy="0">PK · id</tspan><tspan x="482" dy="20">FK · solicitudId</tspan><tspan x="482" dy="20">tipo</tspan><tspan x="482" dy="20">urlArchivo</tspan><tspan x="482" dy="20">hash</tspan><tspan x="482" dy="20">fechaCarga</tspan></text>
+
+  <!-- RegistroAuditoria (Auditoría) -->
+  <rect x="900" y="70" width="270" height="146" rx="4" fill="#ffffff" stroke="#d79b00"/>
+  <rect x="900" y="70" width="270" height="26" rx="4" fill="#ffe6cc" stroke="#d79b00"/>
+  <text x="1035" y="88" text-anchor="middle" class="en">RegistroAuditoria · [Auditoría]</text>
+  <line x1="900" y1="96" x2="1170" y2="96" stroke="#d79b00"/>
+  <text x="912" y="111" class="row"><tspan x="912" dy="0">PK · id</tspan><tspan x="912" dy="20">FK · solicitudId</tspan><tspan x="912" dy="20">FK · usuario</tspan><tspan x="912" dy="20">accion</tspan><tspan x="912" dy="20">fecha</tspan><tspan x="912" dy="20">hashIntegridad</tspan></text>
+
+  <!-- EvaluacionRiesgo (Scoring) -->
+  <rect x="900" y="310" width="270" height="166" rx="4" fill="#ffffff" stroke="#82b366"/>
+  <rect x="900" y="310" width="270" height="26" rx="4" fill="#d5e8d4" stroke="#82b366"/>
+  <text x="1035" y="328" text-anchor="middle" class="en">EvaluacionRiesgo · [Scoring]</text>
+  <line x1="900" y1="336" x2="1170" y2="336" stroke="#82b366"/>
+  <text x="912" y="351" class="row"><tspan x="912" dy="0">PK · id</tspan><tspan x="912" dy="20">FK · solicitudId</tspan><tspan x="912" dy="20">capacidadPago</tspan><tspan x="912" dy="20">score</tspan><tspan x="912" dy="20">nivelRiesgo</tspan><tspan x="912" dy="20">justificacion</tspan><tspan x="912" dy="20">fecha</tspan></text>
+
+  <!-- ReglaScoring (Scoring) -->
+  <rect x="900" y="560" width="270" height="166" rx="4" fill="#ffffff" stroke="#82b366"/>
+  <rect x="900" y="560" width="270" height="26" rx="4" fill="#d5e8d4" stroke="#82b366"/>
+  <text x="1035" y="578" text-anchor="middle" class="en">ReglaScoring · [Scoring]</text>
+  <line x1="900" y1="586" x2="1170" y2="586" stroke="#82b366"/>
+  <text x="912" y="601" class="row"><tspan x="912" dy="0">PK · id</tspan><tspan x="912" dy="20">nombre</tspan><tspan x="912" dy="20">parametro</tspan><tspan x="912" dy="20">operador</tspan><tspan x="912" dy="20">umbral</tspan><tspan x="912" dy="20">ponderacion</tspan><tspan x="912" dy="20">activa</tspan></text>
+
+  <!-- Leyenda -->
+  <text x="40" y="745" class="leg">Línea continua = relación dentro del módulo · línea discontinua = clave foránea que cruza módulos · ReglaScoring sin FK (tabla de parámetros).</text>
+</svg>

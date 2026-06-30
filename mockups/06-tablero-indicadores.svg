@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="600" viewBox="0 0 820 600">
+  <style>
+    text{font-family:'Segoe UI',Arial,sans-serif;fill:#212529}
+    .brand{font-size:18px;font-weight:700;fill:#fff}
+    .title{font-size:16px;font-weight:600;fill:#fff}
+    .hu{font-size:12px;font-weight:700;fill:#1c7ed6}
+    .cardtitle{font-size:20px;font-weight:700;fill:#212529}
+    .sub{font-size:13px;fill:#868e96}
+    .kpilabel{font-size:12px;fill:#868e96}
+    .h3{font-size:14px;font-weight:700;fill:#212529}
+    .axis{font-size:11px;fill:#868e96}
+    .leg{font-size:13px;fill:#212529}
+  </style>
+  <rect width="820" height="600" fill="#f1f3f5"/>
+  <rect width="820" height="56" fill="#1c7ed6"/>
+  <text x="24" y="35" class="brand">CrediFlow</text>
+  <text x="410" y="35" text-anchor="middle" class="title">Tablero de indicadores</text>
+  <rect x="724" y="16" width="72" height="24" rx="12" fill="#fff"/>
+  <text x="760" y="32" text-anchor="middle" class="hu">HU13</text>
+
+  <rect x="24" y="80" width="772" height="500" rx="10" fill="#fff" stroke="#ced4da"/>
+  <text x="48" y="116" class="cardtitle">Indicadores del proceso de crédito</text>
+  <text x="48" y="138" class="sub">Periodo: Junio 2026</text>
+
+  <rect x="48" y="158" width="176" height="86" rx="8" fill="#f8f9fa" stroke="#ced4da"/>
+  <text x="64" y="186" class="kpilabel">Solicitudes (mes)</text>
+  <text x="64" y="222" font-size="28" font-weight="700" fill="#1c7ed6">128</text>
+
+  <rect x="234" y="158" width="176" height="86" rx="8" fill="#f8f9fa" stroke="#ced4da"/>
+  <text x="250" y="186" class="kpilabel">Aprobadas</text>
+  <text x="250" y="222" font-size="28" font-weight="700" fill="#212529">86</text>
+
+  <rect x="420" y="158" width="176" height="86" rx="8" fill="#f8f9fa" stroke="#ced4da"/>
+  <text x="436" y="186" class="kpilabel">% aprobación</text>
+  <text x="436" y="222" font-size="28" font-weight="700" fill="#2f9e44">67%</text>
+
+  <rect x="606" y="158" width="166" height="86" rx="8" fill="#f8f9fa" stroke="#ced4da"/>
+  <text x="622" y="186" class="kpilabel">Tiempo prom.</text>
+  <text x="622" y="222" font-size="28" font-weight="700" fill="#212529">1.8 d</text>
+
+  <text x="48" y="296" class="h3">Solicitudes por semana</text>
+  <line x1="60" y1="450" x2="430" y2="450" stroke="#ced4da"/>
+  <rect x="92" y="370" width="44" height="80" fill="#1c7ed6"/>
+  <rect x="172" y="340" width="44" height="110" fill="#1c7ed6"/>
+  <rect x="252" y="356" width="44" height="94" fill="#1c7ed6"/>
+  <rect x="332" y="322" width="44" height="128" fill="#1c7ed6"/>
+  <text x="114" y="468" text-anchor="middle" class="axis">Sem 1</text>
+  <text x="194" y="468" text-anchor="middle" class="axis">Sem 2</text>
+  <text x="274" y="468" text-anchor="middle" class="axis">Sem 3</text>
+  <text x="354" y="468" text-anchor="middle" class="axis">Sem 4</text>
+
+  <text x="480" y="296" class="h3">Distribución por nivel de riesgo</text>
+  <rect x="480" y="324" width="16" height="16" rx="3" fill="#2f9e44"/>
+  <text x="506" y="337" class="leg">Bajo</text>
+  <rect x="600" y="328" width="150" height="10" rx="5" fill="#e9ecef"/>
+  <rect x="600" y="328" width="63" height="10" rx="5" fill="#2f9e44"/>
+  <text x="760" y="337" class="leg">42%</text>
+
+  <rect x="480" y="360" width="16" height="16" rx="3" fill="#f08c00"/>
+  <text x="506" y="373" class="leg">Medio</text>
+  <rect x="600" y="364" width="150" height="10" rx="5" fill="#e9ecef"/>
+  <rect x="600" y="364" width="50" height="10" rx="5" fill="#f08c00"/>
+  <text x="760" y="373" class="leg">33%</text>
+
+  <rect x="480" y="396" width="16" height="16" rx="3" fill="#e03131"/>
+  <text x="506" y="409" class="leg">Alto</text>
+  <rect x="600" y="400" width="150" height="10" rx="5" fill="#e9ecef"/>
+  <rect x="600" y="400" width="38" height="10" rx="5" fill="#e03131"/>
+  <text x="760" y="409" class="leg">25%</text>
+</svg>

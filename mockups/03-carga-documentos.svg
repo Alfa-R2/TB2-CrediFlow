@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="600" viewBox="0 0 820 600">
+  <style>
+    text{font-family:'Segoe UI',Arial,sans-serif;fill:#212529}
+    .brand{font-size:18px;font-weight:700;fill:#fff}
+    .title{font-size:16px;font-weight:600;fill:#fff}
+    .hu{font-size:12px;font-weight:700;fill:#1c7ed6}
+    .cardtitle{font-size:20px;font-weight:700;fill:#212529}
+    .sub{font-size:13px;fill:#868e96}
+    .btntext{font-size:15px;font-weight:700;fill:#fff}
+    .th{font-size:12px;font-weight:700;fill:#495057}
+    .td{font-size:13px;fill:#212529}
+    .muted{font-size:12px;fill:#868e96}
+  </style>
+  <rect width="820" height="600" fill="#f1f3f5"/>
+  <rect width="820" height="56" fill="#1c7ed6"/>
+  <text x="24" y="35" class="brand">CrediFlow</text>
+  <text x="410" y="35" text-anchor="middle" class="title">Carga de documentos del cliente</text>
+  <rect x="724" y="16" width="72" height="24" rx="12" fill="#fff"/>
+  <text x="760" y="32" text-anchor="middle" class="hu">HU02</text>
+
+  <rect x="24" y="80" width="772" height="500" rx="10" fill="#fff" stroke="#ced4da"/>
+  <text x="48" y="116" class="cardtitle">Documentos de la solicitud</text>
+  <text x="48" y="138" class="sub">Solicitud N° SOL-000123 · Cliente: Juan Pérez</text>
+
+  <rect x="48" y="158" width="724" height="120" rx="8" fill="#f8f9fa" stroke="#adb5bd" stroke-dasharray="6 4"/>
+  <circle cx="410" cy="196" r="16" fill="none" stroke="#1c7ed6" stroke-width="2"/>
+  <path d="M410 204 v-16 M403 195 l7 -7 l7 7" fill="none" stroke="#1c7ed6" stroke-width="2"/>
+  <text x="410" y="232" text-anchor="middle" font-size="14" fill="#495057">Arrastra aquí las boletas de pago y estados financieros</text>
+  <text x="410" y="252" text-anchor="middle" class="muted">PDF o JPG · máximo 5 MB por archivo</text>
+  <rect x="335" y="258" width="150" height="30" rx="6" fill="#fff" stroke="#1c7ed6"/>
+  <text x="410" y="278" text-anchor="middle" font-size="12" font-weight="700" fill="#1c7ed6">Seleccionar archivos</text>
+
+  <rect x="48" y="306" width="724" height="30" fill="#f1f3f5"/>
+  <text x="56" y="326" class="th">Tipo</text>
+  <text x="240" y="326" class="th">Archivo</text>
+  <text x="470" y="326" class="th">Hash</text>
+  <text x="600" y="326" class="th">Fecha</text>
+  <text x="690" y="326" class="th">Estado</text>
+
+  <text x="56" y="364" class="td">Boleta de pago</text>
+  <text x="240" y="364" class="td">boleta_enero.pdf</text>
+  <text x="470" y="364" class="td">a1b2…f9c3</text>
+  <text x="600" y="364" class="td">20/06/2026</text>
+  <text x="690" y="364" font-size="13" fill="#2f9e44">✔ Validado</text>
+  <line x1="48" y1="378" x2="772" y2="378" stroke="#e9ecef"/>
+
+  <text x="56" y="404" class="td">Estado financiero</text>
+  <text x="240" y="404" class="td">edofin_q1.pdf</text>
+  <text x="470" y="404" class="td">7c3d…2210</text>
+  <text x="600" y="404" class="td">20/06/2026</text>
+  <text x="690" y="404" font-size="13" fill="#2f9e44">✔ Validado</text>
+  <line x1="48" y1="418" x2="772" y2="418" stroke="#e9ecef"/>
+
+  <text x="48" y="476" class="muted">Cada documento se asocia a la solicitud y se calcula su hash de integridad.</text>
+  <rect x="624" y="510" width="148" height="44" rx="6" fill="#1c7ed6"/>
+  <text x="698" y="538" text-anchor="middle" class="btntext">Subir</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="600" viewBox="0 0 820 600">
+  <style>
+    text{font-family:'Segoe UI',Arial,sans-serif;fill:#212529}
+    .brand{font-size:18px;font-weight:700;fill:#fff}
+    .title{font-size:16px;font-weight:600;fill:#fff}
+    .hu{font-size:12px;font-weight:700;fill:#1c7ed6}
+    .cardtitle{font-size:20px;font-weight:700;fill:#212529}
+    .sub{font-size:13px;fill:#868e96}
+    .label{font-size:13px;fill:#495057}
+    .muted{font-size:12px;fill:#868e96}
+  </style>
+  <rect width="820" height="600" fill="#f1f3f5"/>
+  <rect width="820" height="56" fill="#1c7ed6"/>
+  <text x="24" y="35" class="brand">CrediFlow</text>
+  <text x="410" y="35" text-anchor="middle" class="title">Resultado de evaluación de riesgo</text>
+  <rect x="686" y="16" width="110" height="24" rx="12" fill="#fff"/>
+  <text x="741" y="32" text-anchor="middle" class="hu">HU05·06·08</text>
+
+  <rect x="24" y="80" width="772" height="500" rx="10" fill="#fff" stroke="#ced4da"/>
+  <text x="48" y="116" class="cardtitle">Evaluación de riesgo</text>
+  <text x="48" y="138" class="sub">Solicitud SOL-000123 · Cliente: Juan Pérez</text>
+
+  <text x="48" y="186" class="label">Capacidad de pago</text>
+  <text x="48" y="216" font-size="24" font-weight="700" fill="#212529">S/ 2,450 / mes</text>
+
+  <text x="48" y="262" class="label">Score crediticio</text>
+  <rect x="48" y="272" width="360" height="18" rx="9" fill="#e9ecef"/>
+  <rect x="48" y="272" width="162" height="18" rx="9" fill="#f08c00"/>
+  <text x="418" y="287" font-size="14" font-weight="600">45 / 100</text>
+
+  <text x="560" y="186" class="label">Nivel de riesgo</text>
+  <rect x="560" y="198" width="200" height="68" rx="10" fill="#fff4e6" stroke="#f08c00"/>
+  <text x="660" y="242" text-anchor="middle" font-size="30" font-weight="700" fill="#f08c00">MEDIO</text>
+
+  <rect x="48" y="312" width="724" height="132" rx="8" fill="#f8f9fa" stroke="#ced4da"/>
+  <text x="64" y="336" font-size="13" font-weight="700" fill="#212529">Reglas aplicadas (justificación)</text>
+  <text x="64" y="364" font-size="13" fill="#212529">• Ratio de endeudamiento 42% (umbral &gt; 0.40)  →  −30</text>
+  <text x="64" y="390" font-size="13" fill="#212529">• Ratio cuota/capacidad 51% (umbral &gt; 0.40)  →  −25</text>
+  <text x="64" y="422" font-size="13" font-weight="700" fill="#212529">Score final = 100 − 30 − 25 = 45  →  MEDIO</text>
+
+  <rect x="470" y="486" width="140" height="44" rx="6" fill="#fff" stroke="#e03131"/>
+  <text x="540" y="514" text-anchor="middle" font-size="15" font-weight="700" fill="#e03131">Rechazar</text>
+  <rect x="624" y="486" width="148" height="44" rx="6" fill="#2f9e44"/>
+  <text x="698" y="514" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">Aprobar</text>
+
+  <text x="48" y="514" class="muted">Decisión del comité de crédito (HU08)</text>
+</svg>

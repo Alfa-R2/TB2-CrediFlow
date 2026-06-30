@@ -1,0 +1,18 @@
+# Dependencies
+/node_modules
+
+# Build outputs
+/dist
+/tmp
+/out-tsc
+/.angular
+
+# IDE
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# Misc
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="560" viewBox="0 0 820 560">
+  <style>
+    text{font-family:'Segoe UI',Arial,sans-serif;fill:#212529}
+    .brand{font-size:18px;font-weight:700;fill:#fff}
+    .title{font-size:16px;font-weight:600;fill:#fff}
+    .hu{font-size:12px;font-weight:700;fill:#1c7ed6}
+    .cardtitle{font-size:20px;font-weight:700;fill:#212529}
+    .label{font-size:13px;fill:#495057}
+    .ph{font-size:13px;fill:#adb5bd}
+    .btntext{font-size:15px;font-weight:700;fill:#fff}
+    .muted{font-size:12px;fill:#868e96}
+  </style>
+  <rect width="820" height="560" fill="#f1f3f5"/>
+  <rect width="820" height="56" fill="#1c7ed6"/>
+  <text x="24" y="35" class="brand">CrediFlow</text>
+  <text x="410" y="35" text-anchor="middle" class="title">Inicio de sesión por rol</text>
+  <rect x="724" y="16" width="72" height="24" rx="12" fill="#fff"/>
+  <text x="760" y="32" text-anchor="middle" class="hu">HU12</text>
+
+  <rect x="260" y="120" width="300" height="360" rx="10" fill="#fff" stroke="#ced4da"/>
+  <circle cx="410" cy="170" r="22" fill="#e7f5ff" stroke="#1c7ed6"/>
+  <rect x="400" y="166" width="20" height="14" rx="3" fill="none" stroke="#1c7ed6" stroke-width="2"/>
+  <path d="M404 166 v-4 a6 6 0 0 1 12 0 v4" fill="none" stroke="#1c7ed6" stroke-width="2"/>
+  <text x="410" y="220" text-anchor="middle" class="cardtitle">Bienvenido</text>
+
+  <text x="284" y="258" class="label">Usuario</text>
+  <rect x="284" y="266" width="252" height="36" rx="6" fill="#f8f9fa" stroke="#ced4da"/>
+  <text x="296" y="289" class="ph">usuario</text>
+
+  <text x="284" y="328" class="label">Contraseña</text>
+  <rect x="284" y="336" width="252" height="36" rx="6" fill="#f8f9fa" stroke="#ced4da"/>
+  <text x="296" y="359" class="ph">••••••••</text>
+
+  <text x="284" y="398" class="label">Rol</text>
+  <rect x="284" y="406" width="252" height="36" rx="6" fill="#f8f9fa" stroke="#ced4da"/>
+  <text x="296" y="429" class="ph">Asesor comercial</text>
+  <text x="520" y="429" class="ph">▾</text>
+
+  <rect x="284" y="456" width="252" height="44" rx="6" fill="#1c7ed6"/>
+  <text x="410" y="484" text-anchor="middle" class="btntext">Ingresar</text>
+
+  <text x="410" y="524" text-anchor="middle" class="muted">Acceso restringido por rol · token JWT</text>
+</svg>
