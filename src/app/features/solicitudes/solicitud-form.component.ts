@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SolicitudService } from './solicitud.service';
@@ -36,24 +36,23 @@ import { TipoDoc } from '../../core/models/enums';
               <label for="numDoc">N° de documento</label>
               <input id="numDoc" type="text" formControlName="numDoc" placeholder="Ingrese número"
                 [class.invalid]="invalid('cliente.numDoc')" />
+              <!-- @if (invalid('cliente.numDoc')) {
+                <span class="field-error">Obligatorio.</span>
+              } -->
               @if (invalid('cliente.numDoc')) {
-                <span class="field-error">Obligatorio.</span>
-              }
-            </div>
-            <div class="field">
-              <label for="nombres">Nombres</label>
-              <input id="nombres" type="text" formControlName="nombres"
-                [class.invalid]="invalid('cliente.nombres')" />
-              @if (invalid('cliente.nombres')) {
-                <span class="field-error">Obligatorio.</span>
-              }
-            </div>
-            <div class="field">
-              <label for="apellidos">Apellidos</label>
-              <input id="apellidos" type="text" formControlName="apellidos"
-                [class.invalid]="invalid('cliente.apellidos')" />
-              @if (invalid('cliente.apellidos')) {
-                <span class="field-error">Obligatorio.</span>
+                <span class="field-error">
+                  @if (form.get('cliente.numDoc')?.hasError('required')) {
+                    Obligatorio.
+                  } @else {
+                    @if (form.get('cliente.tipoDoc')?.value === 'DNI') {
+                      El DNI debe tener 8 dígitos.
+                    } @else if (form.get('cliente.tipoDoc')?.value === 'RUC') {
+                      El RUC debe tener 11 dígitos.
+                    } @else if (form.get('cliente.tipoDoc')?.value === 'CE') {
+                      El CE debe tener de 9 a 12 dígitos.
+                    }
+                  }
+                </span>
               }
             </div>
             <div class="field">

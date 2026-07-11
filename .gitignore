@@ -16,3 +16,11 @@
 *.log
 .DS_Store
 Thumbs.db
+*.tsbuildinfo
+
+# Cobertura de tests
+/coverage
+
+# Secretos / variables de entorno locales
+.env
+.env.*.local

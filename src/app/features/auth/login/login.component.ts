@@ -15,7 +15,7 @@ import { AuthService } from '../../../core/auth/auth.service';
 
         <form [formGroup]="form" (ngSubmit)="submit()">
           <div class="field">
-            <label for="username">Usuario</label>
+            <label for="username">Ingrese su Usuario</label>
             <input
               id="username"
               type="text"
@@ -30,7 +30,7 @@ import { AuthService } from '../../../core/auth/auth.service';
           </div>
 
           <div class="field">
-            <label for="password">Contraseña</label>
+            <label for="password">Ingrese su Contraseña</label>
             <input
               id="password"
               type="password"

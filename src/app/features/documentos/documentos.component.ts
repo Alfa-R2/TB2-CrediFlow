@@ -73,8 +73,8 @@ const MAX_BYTES = 5 * 1024 * 1024; // 5 MB (validación de UX; el backend revali
   styles: [
     `
       .upload-box {
-        border: 1px dashed #adb5bd;
-        background: #f8f9fa;
+        border: 1px dashed var(--placeholder);
+        background: var(--surface-alt);
         border-radius: 8px;
         padding: 20px;
         margin: 16px 0;

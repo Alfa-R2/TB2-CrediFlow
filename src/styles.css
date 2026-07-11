@@ -1,24 +1,74 @@
 /* ============================================================
    CrediFlow — estilos globales
-   Color primario de los mockups: #1c7ed6
+   Sistema de diseño dual: Dark (por defecto) / Light.
+   El toggle lo maneja ThemeService añadiendo/quitando la clase
+   `theme-light` en <html>. Dark = valores en :root; Light = overrides
+   en :root.theme-light. Los NOMBRES de variable se mantienen iguales
+   para no tocar cada componente.
    ============================================================ */
 :root {
-  --primary: #1c7ed6;
-  --primary-dark: #1971c2;
+  /* ---- Dark mode (por defecto): grafito + azul eléctrico + verde neón ---- */
+  --bg: #0b0d10;
+  --surface: #16181d;
+  --surface-alt: #1d2027;
+  --border: #2a2e37;
+  --border-soft: #20232a;
+  --text: #f5f7fa;
+  --text-muted: #9aa3af;
+  --label: #c9d1db;
+  --placeholder: #6b7280;
+
+  --primary: #2f8fff;
+  --primary-dark: #1c6fe0;
+
+  --green: #3ddc84;
+  --green-bg: rgba(61, 220, 132, 0.14);
+
+  --orange: #f0a93b;
+  --orange-bg: rgba(240, 169, 59, 0.14);
+
+  --red: #f1555a;
+  --red-bg: rgba(241, 85, 90, 0.14);
+
+  /* Acento cálido reservado EXCLUSIVAMENTE para CTAs críticos (§3). No confundir con --orange
+     (estado de riesgo MEDIO / advertencias): el CTA usa oro, el estado usa ámbar. */
+  --cta: #f5b301;
+  --cta-dark: #d89a00;
+  --cta-glow: rgba(245, 179, 1, 0.55);
+  --cta-text: #14110a;
+
+  --shadow: 0 6px 24px rgba(0, 0, 0, 0.55);
+}
+
+:root.theme-light {
+  /* ---- Light mode: paleta original del proyecto, accesible sobre blanco ---- */
   --bg: #f1f3f5;
   --surface: #ffffff;
+  --surface-alt: #f8f9fa;
   --border: #ced4da;
   --border-soft: #e9ecef;
   --text: #212529;
   --text-muted: #868e96;
   --label: #495057;
   --placeholder: #adb5bd;
+
+  --primary: #1c7ed6;
+  --primary-dark: #1971c2;
+
   --green: #2f9e44;
   --green-bg: #ebfbee;
+
   --orange: #f08c00;
   --orange-bg: #fff4e6;
+
   --red: #e03131;
   --red-bg: #fff5f5;
+
+  --cta: #d9480f;
+  --cta-dark: #b93d0d;
+  --cta-glow: rgba(217, 72, 15, 0.35);
+  --cta-text: #ffffff;
+
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
@@ -39,6 +89,7 @@ body {
   color: var(--text);
   font-size: 14px;
   line-height: 1.5;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 a {
@@ -119,8 +170,34 @@ a:hover {
   background: rgba(255, 255, 255, 0.15);
 }
 
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.24);
+  transform: rotate(15deg);
+}
+
 .content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* Centra verticalmente cuando el contenido cabe en el viewport; si es más largo que la
+     pantalla (tablas largas, listados), "safe" evita que se corte arriba y cae a alineado
+     arriba en su lugar. */
+  justify-content: safe center;
   padding: 24px;
   max-width: 980px;
   width: 100%;
@@ -134,11 +211,13 @@ a:hover {
   border-radius: 10px;
   padding: 24px;
   box-shadow: var(--shadow);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 .card-title {
   font-size: 20px;
   font-weight: 700;
   margin: 0 0 4px;
+  color: var(--text);
 }
 .card-sub {
   font-size: 13px;
@@ -179,7 +258,7 @@ textarea {
   padding: 9px 12px;
   border: 1px solid var(--border);
   border-radius: 6px;
-  background: #f8f9fa;
+  background: var(--surface-alt);
   color: var(--text);
   width: 100%;
 }
@@ -188,7 +267,8 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--primary);
-  background: #fff;
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(47, 143, 255, 0.18);
 }
 input::placeholder {
   color: var(--placeholder);
@@ -215,6 +295,7 @@ select.invalid {
   border: 1px solid transparent;
   cursor: pointer;
   font-family: inherit;
+  transition: background-color 0.2s ease, box-shadow 0.25s ease, transform 0.15s ease;
 }
 .btn:disabled {
   opacity: 0.55;
@@ -228,22 +309,22 @@ select.invalid {
   background: var(--primary-dark);
 }
 .btn-ghost {
-  background: #fff;
+  background: var(--surface);
   color: var(--label);
   border-color: var(--border);
 }
 .btn-ghost:hover:not(:disabled) {
-  background: #f1f3f5;
+  background: var(--surface-alt);
 }
 .btn-success {
   background: var(--green);
-  color: #fff;
+  color: #063d1f;
 }
 .btn-success:hover:not(:disabled) {
-  background: #2b8a3e;
+  filter: brightness(0.92);
 }
 .btn-danger-outline {
-  background: #fff;
+  background: transparent;
   color: var(--red);
   border-color: var(--red);
 }
@@ -254,6 +335,31 @@ select.invalid {
   font-size: 13px;
   padding: 6px 12px;
 }
+
+/* CTA cálido (dorado/coral) — reservado a acciones críticas (ej. "Solicitar crédito",
+   "Simular cuota", "Actualizar indicadores"). Microinteracción: glow suave en hover. */
+.btn-cta {
+  background: linear-gradient(135deg, var(--cta), var(--cta-dark));
+  color: var(--cta-text);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+.btn-cta:hover:not(:disabled) {
+  box-shadow: 0 0 0 4px var(--cta-glow), 0 6px 18px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+.btn-cta:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .theme-toggle,
+  .card,
+  body {
+    transition: none;
+  }
+}
+
 .actions {
   display: flex;
   gap: 12px;
@@ -272,15 +378,16 @@ select.invalid {
   font-size: 12px;
   font-weight: 700;
   color: var(--label);
-  background: var(--bg);
+  background: var(--surface-alt);
   padding: 9px 12px;
 }
 .table tbody td {
   padding: 10px 12px;
   border-bottom: 1px solid var(--border-soft);
+  color: var(--text);
 }
 .table tbody tr:hover {
-  background: #f8f9fa;
+  background: var(--surface-alt);
 }
 
 /* ---------- Badges ---------- */
@@ -308,12 +415,12 @@ select.invalid {
   border-color: var(--red);
 }
 .badge-blue {
-  background: #e7f5ff;
+  background: rgba(47, 143, 255, 0.14);
   color: var(--primary);
   border-color: var(--primary);
 }
 .badge-gray {
-  background: var(--bg);
+  background: var(--surface-alt);
   color: var(--text-muted);
   border-color: var(--border);
 }
@@ -339,13 +446,25 @@ select.invalid {
   color: var(--text-muted);
   padding: 24px 0;
 }
+
+/* Jerarquía visual de datos financieros: azul (neutral/identidad) o verde (positivo) */
+.accent-blue {
+  color: var(--primary) !important;
+}
+.accent-green {
+  color: var(--green) !important;
+}
+.accent-red {
+  color: var(--red) !important;
+}
+
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
 .kpi {
-  background: #f8f9fa;
+  background: var(--surface-alt);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 16px;
@@ -358,6 +477,7 @@ select.invalid {
   font-size: 28px;
   font-weight: 700;
   margin-top: 8px;
+  color: var(--text);
 }
 
 @media (max-width: 720px) {
@@ -382,7 +502,7 @@ select.invalid {
   padding: 12px 16px;
   border-radius: 8px;
   color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
   font-size: 13px;
   display: flex;
   justify-content: space-between;
@@ -394,17 +514,19 @@ select.invalid {
 }
 .toast-success {
   background: var(--green);
+  color: #063d1f;
 }
 .toast-info {
   background: var(--primary);
 }
 .toast-warn {
   background: var(--orange);
+  color: #3a2400;
 }
 .toast button {
   background: transparent;
   border: none;
-  color: #fff;
+  color: inherit;
   cursor: pointer;
   font-size: 16px;
   line-height: 1;

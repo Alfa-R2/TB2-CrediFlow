@@ -6,7 +6,7 @@ import { SolicitudService } from '../solicitudes/solicitud.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { NotificationService } from '../../core/notifications/notification.service';
 import { EvaluacionResponse } from '../../core/models/dtos';
-import { AccionDecision } from '../../core/models/enums';
+import { AccionDecision, EstadoSolicitud } from '../../core/models/enums';
 import { RiesgoBadgeComponent } from '../../shared/riesgo-badge.component';
 
 /**
@@ -52,13 +52,19 @@ import { RiesgoBadgeComponent } from '../../shared/riesgo-badge.component';
         </div>
 
         @if (esComite()) {
-          <div class="actions">
-            <button class="btn btn-danger-outline" type="button"
-              [disabled]="deciding()" (click)="decidir('RECHAZAR')">Rechazar</button>
-            <button class="btn btn-success" type="button"
-              [disabled]="deciding()" (click)="decidir('APROBAR')">Aprobar</button>
-          </div>
-          <p class="muted" style="text-align:right">Decisión del comité de crédito (HU08)</p>
+          @if (puedeDecidir()) {
+            <div class="actions">
+              <button class="btn btn-danger-outline" type="button"
+                [disabled]="deciding()" (click)="decidir('RECHAZAR')">Rechazar</button>
+              <button class="btn btn-success" type="button"
+                [disabled]="deciding()" (click)="decidir('APROBAR')">Aprobar</button>
+            </div>
+            <p class="muted" style="text-align:right">Decisión del comité de crédito (HU08)</p>
+          } @else if (solicitudEstado()) {
+            <p class="muted" style="text-align:right">
+              Esta solicitud ya fue <strong>{{ solicitudEstado() }}</strong>; no admite una nueva decisión.
+            </p>
+          }
         }
         }
       } @else {
@@ -87,7 +93,7 @@ import { RiesgoBadgeComponent } from '../../shared/riesgo-badge.component';
       .score-bar {
         height: 18px;
         border-radius: 9px;
-        background: #e9ecef;
+        background: var(--border-soft);
         overflow: hidden;
         max-width: 360px;
       }
@@ -104,7 +110,7 @@ import { RiesgoBadgeComponent } from '../../shared/riesgo-badge.component';
         justify-content: center;
       }
       .justif {
-        background: #f8f9fa;
+        background: var(--surface-alt);
         border: 1px solid var(--border);
         border-radius: 8px;
         padding: 16px;
@@ -134,13 +140,24 @@ export class EvaluacionComponent implements OnInit {
   evaluando = signal(false);
   deciding = signal(false);
   evaluacion = signal<EvaluacionResponse | null>(null);
+  solicitudEstado = signal<EstadoSolicitud | null>(null);
 
   esComite = computed(() => this.auth.hasRole(['COMITE']));
   esAnalista = computed(() => this.auth.hasRole(['ANALISTA']));
+  // Solo se puede decidir si la Solicitud sigue EVALUADA (refleja la regla del backend, no la calcula).
+  puedeDecidir = computed(() => this.esComite() && this.solicitudEstado() === 'EVALUADA');
 
   ngOnInit(): void {
     this.solicitudId = Number(this.route.snapshot.paramMap.get('id'));
+    this.cargarEstadoSolicitud();
     this.cargar();
+  }
+
+  /** GET /solicitudes/{id}: abierto a cualquier autenticado (no solo ASESOR como .../estado). */
+  private cargarEstadoSolicitud(): void {
+    this.solicitudService.obtener(this.solicitudId).subscribe({
+      next: (s) => this.solicitudEstado.set(s.estado),
+    });
   }
 
   private cargar(): void {
@@ -164,6 +181,8 @@ export class EvaluacionComponent implements OnInit {
       next: (ev) => {
         this.evaluacion.set(ev);
         this.evaluando.set(false);
+        // El backend solo evalúa solicitudes REGISTRADA y las deja EVALUADA (invariante de ScoringService).
+        this.solicitudEstado.set('EVALUADA');
         this.notify.success('Evaluación ejecutada.');
       },
       error: () => this.evaluando.set(false),
@@ -175,6 +194,7 @@ export class EvaluacionComponent implements OnInit {
     this.solicitudService.decidir(this.solicitudId, { accion }).subscribe({
       next: (res) => {
         this.deciding.set(false);
+        this.solicitudEstado.set(res.estado);
         this.notify.success(`Solicitud ${res.estado}.`);
       },
       error: () => this.deciding.set(false),

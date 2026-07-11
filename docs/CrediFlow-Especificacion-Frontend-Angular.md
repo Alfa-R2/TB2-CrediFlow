@@ -336,6 +336,7 @@ las HU. No hay gate de cobertura para el frontend.
 |---|---|---|
 | Login | Credenciales válidas / inválidas | Acceso y menú por rol / mensaje 401 |
 | Solicitud | Crear con `monto`/`plazoMeses` ≤ 0 o `ingresoMensual` vacío | El backend responde 400 y se muestra el mensaje |
+| Solicitud | Intentar registrar una nueva solicitud para un cliente que ya tiene un proceso activo | El backend responde 409 y se muestra el mensaje |
 | Documentos | Subir archivo > 5 MB | Mensaje de error (413/400) |
 | Evaluación | Evaluar y luego decidir; reintentar decisión sobre solicitud ya decidida | Estado cambia; segunda decisión muestra 409 |
 | Auditoría | Filtrar por `clienteId`, `desde`, `hasta` | Lista filtrada |

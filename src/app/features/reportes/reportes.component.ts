@@ -16,29 +16,36 @@ interface BarraRiesgo {
   imports: [DecimalPipe],
   template: `
     <div class="card">
-      <h1 class="card-title">Indicadores del proceso de crédito</h1>
-      <p class="card-sub">Tablero de indicadores (HU13 · GERENTE)</p>
+      <div class="row-between">
+        <div>
+          <h1 class="card-title">Indicadores del proceso de crédito</h1>
+          <p class="card-sub" style="margin:0">Tablero de indicadores (HU13 · GERENTE)</p>
+        </div>
+        <button class="btn btn-cta" type="button" [disabled]="loading()" (click)="actualizar()">
+          {{ loading() ? 'Actualizando…' : '⟳ Actualizar indicadores' }}
+        </button>
+      </div>
 
       @if (loading()) {
         <div class="spinner">Cargando…</div>
       } @else if (data()) {
         @if (data(); as d) {
-        <div class="kpi-grid">
+        <div class="kpi-grid" style="margin-top:20px">
           <div class="kpi">
             <div class="kpi-label">Total solicitudes</div>
-            <div class="kpi-value" style="color:var(--primary)">{{ d.totalSolicitudes }}</div>
+            <div class="kpi-value accent-blue">{{ d.totalSolicitudes }}</div>
           </div>
           <div class="kpi">
             <div class="kpi-label">Aprobadas</div>
-            <div class="kpi-value">{{ d.aprobadas }}</div>
+            <div class="kpi-value accent-green">{{ d.aprobadas }}</div>
           </div>
           <div class="kpi">
             <div class="kpi-label">Rechazadas</div>
-            <div class="kpi-value" style="color:var(--red)">{{ d.rechazadas }}</div>
+            <div class="kpi-value accent-red">{{ d.rechazadas }}</div>
           </div>
           <div class="kpi">
             <div class="kpi-label">% aprobación</div>
-            <div class="kpi-value" style="color:var(--green)">
+            <div class="kpi-value accent-green">
               {{ d.porcentajeAprobacion | number: '1.0-1' }}%
             </div>
           </div>
@@ -100,7 +107,7 @@ interface BarraRiesgo {
         display: inline-block;
       }
       .bar-track {
-        background: #e9ecef;
+        background: var(--border-soft);
         border-radius: 5px;
         height: 10px;
         overflow: hidden;
@@ -146,6 +153,10 @@ export class ReportesComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.actualizar();
+  }
+
+  actualizar(): void {
     this.loading.set(true);
     this.service.indicadores().subscribe({
       next: (d) => {
