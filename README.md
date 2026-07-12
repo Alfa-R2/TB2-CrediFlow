@@ -25,6 +25,16 @@ directo al backend (sin proxy), cámbialo a `'http://localhost:8080/api'`.
 npm run build      # build de producción → dist/crediflow-web
 ```
 
+## Ejecutar con Docker
+
+```bash
+# # 4) Empaquetar imagen Docker (build multi-stage) y ejecutarla
+docker build -t crediflow-frontend:1.0.0 .
+docker run --name crediflow-frontend \
+  -p 4200:80 \
+  -d crediflow-frontend:1.0.0
+```
+
 ## Mapa rol → pantallas
 
 | Rol | Pantallas | HU |

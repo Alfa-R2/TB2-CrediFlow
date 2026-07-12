@@ -365,5 +365,5 @@ ng serve --proxy-config proxy.conf.json     # dev contra backend en :8080
 ng build                                    # build de producción
 ```
 
-> **Requisito previo:** el backend debe estar corriendo (`mvn spring-boot:run`) con la BD
+> **Requisito previo:** El backend debe estar empaquetado y corriendo en su red de contenedores (`postgres:18.4-alpine` + `crediflow-backend:1.0.0`), con el usuario inicial `admin / admin` (rol `ADMIN_CREDITO`).
 > PostgreSQL levantada; usuario inicial `admin / admin` (rol `ADMIN_CREDITO`).
