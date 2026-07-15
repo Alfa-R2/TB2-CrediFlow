@@ -400,6 +400,8 @@ se actualiza solo. Si el build falla, el error sale en la terminal **y** en el n
 | La petición HTTP "no hace nada" | No te suscribiste | Falta `.subscribe(...)` |
 | `NullInjectorError: No provider for X` | Servicio sin `providedIn: 'root'` o sin proveer | Marca `@Injectable({ providedIn: 'root' })` |
 | El valor no cambia en pantalla | Leíste el signal sin `()` | Usa `loading()`, no `loading` |
+| Petición responde con error 500 al mandar datos inválidos | El backend lanzó una excepción no controlada en el Service (ej. `IllegalArgumentException`). | Cambia la excepción en Java a `BadRequestException` para que el `GlobalExceptionHandler` la traduzca automáticamente en un HTTP 400. |
+| Petición responde con error 409 al registrar una solicitud | El cliente ya posee un flujo activo en evaluación (`REGISTRADA`). | Es el comportamiento correcto diseñado en el **CP09** del backend; la UI debe capturar el error vía `errorInterceptor` y renderizar el aviso. |
 
 ---
 

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SolicitudService } from './solicitud.service';
@@ -36,8 +36,23 @@ import { TipoDoc } from '../../core/models/enums';
               <label for="numDoc">N° de documento</label>
               <input id="numDoc" type="text" formControlName="numDoc" placeholder="Ingrese número"
                 [class.invalid]="invalid('cliente.numDoc')" />
-              @if (invalid('cliente.numDoc')) {
+              <!-- @if (invalid('cliente.numDoc')) {
                 <span class="field-error">Obligatorio.</span>
+              } -->
+              @if (invalid('cliente.numDoc')) {
+                <span class="field-error">
+                  @if (form.get('cliente.numDoc')?.hasError('required')) {
+                    Obligatorio.
+                  } @else {
+                    @if (form.get('cliente.tipoDoc')?.value === 'DNI') {
+                      El DNI debe tener 8 dígitos.
+                    } @else if (form.get('cliente.tipoDoc')?.value === 'RUC') {
+                      El RUC debe tener 11 dígitos.
+                    } @else if (form.get('cliente.tipoDoc')?.value === 'CE') {
+                      El CE debe tener de 9 a 12 dígitos.
+                    }
+                  }
+                </span>
               }
             </div>
             <div class="field">
@@ -105,7 +120,8 @@ import { TipoDoc } from '../../core/models/enums';
     </div>
   `,
 })
-export class SolicitudFormComponent {
+// export class SolicitudFormComponent{
+export class SolicitudFormComponent implements OnInit{
   private fb = inject(FormBuilder);
   private service = inject(SolicitudService);
   private notify = inject(NotificationService);
@@ -118,7 +134,8 @@ export class SolicitudFormComponent {
   form = this.fb.nonNullable.group({
     cliente: this.fb.nonNullable.group({
       tipoDoc: ['DNI' as TipoDoc, Validators.required],
-      numDoc: ['', Validators.required],
+      // numDoc: ['', Validators.required],
+      numDoc: ['', Validators.required, Validators.pattern('^[0-9]{8}$')],
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
       ingresoMensual: [null as number | null, [Validators.required, Validators.min(0)]],
@@ -127,6 +144,39 @@ export class SolicitudFormComponent {
     monto: [null as number | null, [Validators.required, Validators.min(0.01)]],
     plazoMeses: [null as number | null, [Validators.required, Validators.min(1)]],
   });
+
+  // Validación según el tipo de documento seleccionado
+  ngOnInit(): void {
+    const tipoDocControl = this.form.get('cliente.tipoDoc');
+
+    if (tipoDocControl?.value) {
+      this.aplicarValidaciones(tipoDocControl.value);
+    }
+  
+    tipoDocControl?.valueChanges.subscribe((tipo) => {
+      this.aplicarValidaciones(tipo);
+    });
+  }
+
+  private aplicarValidaciones(tipo: string): void {
+      const numDocControl = this.form.get('cliente.numDoc');
+      
+      numDocControl?.clearValidators();
+      numDocControl?.clearAsyncValidators();
+      
+      const nuevasReglas = [Validators.required];
+
+      if (tipo === 'DNI') {
+        nuevasReglas.push(Validators.pattern('^[0-9]{8}$'));
+      } else if (tipo === 'RUC') {
+        nuevasReglas.push(Validators.pattern('^[0-9]{11}$'));
+      } else if (tipo === 'CE') {
+        nuevasReglas.push(Validators.minLength(9), Validators.maxLength(12));
+      }
+
+      numDocControl?.setValidators(nuevasReglas);
+      numDocControl?.updateValueAndValidity();  
+  }
 
   invalid(path: string): boolean {
     const c = this.form.get(path);

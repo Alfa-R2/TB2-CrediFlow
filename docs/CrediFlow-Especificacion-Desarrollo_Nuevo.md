@@ -386,6 +386,7 @@ Todos los endpoints y servicios deben tener control de excepciones (requisito de
 | CP06 | Acceso no autorizado por rol | Seguridad | 403 |
 | CP07 | Consulta de historial | Funcional | lista filtrada por cliente y fechas |
 | CP08 | Cobertura de la suite | Automatizada | cobertura de líneas ≥ 80% (JaCoCo) |
+| CP09 | Intento de registro con solicitud activa | Integración | 409 con mensaje de conflicto              |
 
 **Metas:** cobertura backend **≥ 80%** (JaCoCo); 100% de CP de prioridad alta aprobados;
 0 bugs/vulnerabilidades críticas en SonarQube; control de excepciones en todos los endpoints.
@@ -413,7 +414,7 @@ Todos los endpoints y servicios deben tener control de excepciones (requisito de
 
 **Fase 2 — Resto**
 - **HU04** (consultar estado), **HU07** (CRUD reglas), **HU10** (consulta auditoría), **HU13** (indicadores). → CP07.
-- **DoD:** las 13 HU operativas; CP01–CP08 verdes; SonarQube sin críticos.
+- **DoD:** las 13 HU operativas; CP01–CP09 verdes; SonarQube sin críticos.
 
 ---
 
@@ -421,7 +422,11 @@ Todos los endpoints y servicios deben tener control de excepciones (requisito de
 
 ```bash
 # Base de datos (Docker)
-docker run --name crediflow-db -e POSTGRES_DB=crediflow -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
+docker run --name crediflow-db \
+  -e POSTGRES_DB=crediflow \
+  -e POSTGRES_PASSWORD=postgres \
+  -p 5432:5432 \
+  -d postgres:18.4-alpine
 
 # Build + pruebas + cobertura
 mvn clean verify           # ejecuta tests + JaCoCo (report en target/site/jacoco/index.html)
@@ -430,7 +435,7 @@ mvn clean verify           # ejecuta tests + JaCoCo (report en target/site/jacoc
 mvn spring-boot:run        # API en http://localhost:8080/api
 
 # Empaquetar imagen
-docker build -t crediflow .
+docker build -t crediflow-backend:1.0.0 .
 ```
 `application.yml` debe definir: datasource PostgreSQL, `jwt.secret`, `jwt.expiration`,
 `app.uploads.dir=./uploads`, `app.cors.allowed-origins`.
@@ -464,7 +469,7 @@ docker build -t crediflow .
 - [ ] Cuerpo de error uniforme (§7).
 
 ### Pruebas
-- [ ] CP01–CP08 implementados y verdes.
+- [ ] CP01–CP09 implementados y verdes.
 - [ ] `mvn verify` genera reporte JaCoCo con **cobertura ≥ 80%**.
 - [ ] SonarQube: 0 bugs/vulnerabilidades críticas.
 
